@@ -1,0 +1,27 @@
+This will install a new UCD server in a Docker container.
+This Dockerfile does not require any custom base images, as it builds off
+the base Debian image.
+
+To run:
+
+From UCD Source:
+
+cd $UCD_WORKSPACE/scripts/docker/
+cp ../../dist/install/ibm-ucd-dev.zip .
+docker build --tag="optionalTag" .
+# get the new image ID of the build command
+docker run -P $IMAGE
+
+
+From Standard 
+
+zip -r ibm-ucd-dev ~/Downloads/ibm-ucd-install 
+# where ibm-ucd-install is the standard install that you download
+mv ~/Downloads/ibm-ucd-dev.zip .
+docker build --tag="optionalTag" .
+docker run -P $IMAGE 
+
+# use `docker ps` to view the port mappings
+
+
+docker run -d -p 8080:8080 -p 8443:8443 --name=ucd-server ibm-ucd
